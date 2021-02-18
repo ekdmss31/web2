@@ -3,9 +3,9 @@ var fs = require('fs');
 var url = require('url');//url이라는 모듈을 사용할 것이다.
 
 var app = http.createServer(function(request,response){
-    var url = request.url;
-    var queryData = url.parse(_url,true).query;
-    console.log(queryData);
+    var _url = request.url;
+    var queryData = url.parse( _url, true).query;
+    console.log(queryData.id);
     if(_url == '/'){
       _url = '/index.html';
     }
@@ -13,8 +13,7 @@ var app = http.createServer(function(request,response){
       return response.writeHead(404);
     }
     response.writeHead(200);
-    console.log(__dirname + _url);
-    response.end(fs.readFileSync(__dirname + _url));
+    response.end(queryData.id);//사용자가 접속안 url에 따라 이 파일을 읽어주는 코드. 
     //fs.readFileSync(__dirname + url) : node js 기능임.
 });
 app.listen(3000);
